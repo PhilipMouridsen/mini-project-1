@@ -37,7 +37,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 break;
 
             case DUPLICATE:
-                response = stringList.get(0);
+                // TO-DO
                 System.out.println("DUPLICATE");
                 break;
 
@@ -53,6 +53,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 break;
 
             case SEND:
+                // TO-DO
                 System.out.println("SEND");
                 break;
 
