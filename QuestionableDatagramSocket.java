@@ -5,6 +5,7 @@ import java.net.*;
 public class QuestionableDatagramSocket extends DatagramSocket {
 
     private Random random = new Random();
+    //private String[] words;
 
     enum Response {
         DISCARD, DUPLICATE, REORDER, SEND
@@ -16,30 +17,30 @@ public class QuestionableDatagramSocket extends DatagramSocket {
 
     QuestionableDatagramSocket(int i) throws SocketException {
         super(i);
-
     }
 
-    @Override
+    @Override //not needed I think
     public synchronized void receive(DatagramPacket p) throws IOException {
         super.receive(p);
         String s = new String(p.getData());
-        
-        // Logic
-        System.out.println("QuestionableDatagramSocket: " + s);
 
+        // Logic
+        String[] words = s.split(" ");    
     }
 
     @Override
     public void send(DatagramPacket p) throws IOException {
         // TODO Auto-generated method stub
-        super.send(p);
-
         Response[] responses = Response.values();
         int pickResponse = random.nextInt(4);
         
+        String s = new String(p.getData());
+        String[] words = s.split(" ");
+        String respond = new String();
+
         switch (responses[pickResponse]) {
             case DISCARD:
-                System.out.println("DISCARD");
+                //;
                 break;
             case DUPLICATE:
                 System.out.println("DUPLICATE");
@@ -53,10 +54,13 @@ public class QuestionableDatagramSocket extends DatagramSocket {
             default:
                 break;
         }
+
+        byte[] msg = s.getBytes();
+        p.setData(msg);
+        super.send(p);
     }
 
     public static void main(String[] args) {
-        
         try {
             QuestionableDatagramSocket socket = new QuestionableDatagramSocket();
         } catch (SocketException e) { }
