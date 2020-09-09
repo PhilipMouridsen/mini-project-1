@@ -37,7 +37,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 break;
 
             case DUPLICATE:
-                stringList.add(stringList.get(-1));
+                stringList.add(stringList.get(0));
                 System.out.println("DUPLICATE");
                 break;
 
@@ -48,7 +48,6 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 for (String word : stringList) {
                     sb.append(word + " ");
                 }
-                ;
                 response = sb.toString().trim();
                 System.out.println("REORDER");
                 break;
@@ -58,7 +57,6 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 for (String word : stringList) {
                     sb2.append(word + " ");
                 }
-                ;
                 response = sb2.toString().trim();
                 System.out.println("SEND");
                 break;
