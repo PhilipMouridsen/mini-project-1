@@ -20,7 +20,7 @@ public class UDPClient {
                 byte[] msgBytes = msg.getBytes();
 
                 // Send the message
-                InetAddress aHost = InetAddress.getByName("10.26.30.85");
+                InetAddress aHost = InetAddress.getByName("localhost");
                 // InetAddress aHost = InetAddress.getByName("10.26.15.161");
 
                 DatagramPacket request = new DatagramPacket(msgBytes, msgBytes.length, aHost, serverPort);
