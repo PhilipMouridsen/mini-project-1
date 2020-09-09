@@ -10,7 +10,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
         DISCARD, DUPLICATE, REORDER, SEND
     }
 
-    QuestionableDatagramSocket() throws SocketException{
+    QuestionableDatagramSocket() throws SocketException {
         super();
     }
 
@@ -23,7 +23,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
         // TODO Auto-generated method stub
         Response[] responses = Response.values();
         int pickResponse = random.nextInt(4);
-        
+
         String s = new String(p.getData());
         String[] words = s.split(" ");
         String response = "";
