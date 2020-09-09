@@ -5,7 +5,6 @@ import java.net.*;
 public class QuestionableDatagramSocket extends DatagramSocket {
 
     private Random random = new Random();
-    //private String[] words;
 
     enum Response {
         DISCARD, DUPLICATE, REORDER, SEND
@@ -19,15 +18,6 @@ public class QuestionableDatagramSocket extends DatagramSocket {
         super(i);
     }
 
-    @Override //not needed I think
-    public synchronized void receive(DatagramPacket p) throws IOException {
-        super.receive(p);
-        String s = new String(p.getData());
-
-        // Logic
-        String[] words = s.split(" ");    
-    }
-
     @Override
     public void send(DatagramPacket p) throws IOException {
         // TODO Auto-generated method stub
@@ -36,35 +26,40 @@ public class QuestionableDatagramSocket extends DatagramSocket {
         
         String s = new String(p.getData());
         String[] words = s.split(" ");
-        String respond = new String();
+        String response = "";
 
         switch (responses[pickResponse]) {
             case DISCARD:
-                //;
+                int index = words.length-1;
+                response += words[index];
+                System.out.println("DISCARD");
                 break;
             case DUPLICATE:
+                for(int j=0; j<words.length; j++){
+                    response += words[j] + " ";
+                    if(j==0) response += words[j] + " ";
+                };
                 System.out.println("DUPLICATE");
                 break;
             case REORDER:
+                int[] indexes = new int[words.length];
+                for(int j=0; j<indexes.length; j++)
+                    indexes[j] = random.nextInt(words.length-1);
+                for(int j=0; j<words.length; j++)
+                    response += words[indexes[j]] + " ";
                 System.out.println("REORDER");
                 break;
             case SEND:
+                for(int j=0; j<words.length; j++)
+                    response += words[j] + " ";
                 System.out.println("SEND");
                 break;
             default:
                 break;
         }
 
-        byte[] msg = s.getBytes();
+        byte[] msg = response.getBytes();
         p.setData(msg);
         super.send(p);
     }
-
-    public static void main(String[] args) {
-        try {
-            QuestionableDatagramSocket socket = new QuestionableDatagramSocket();
-        } catch (SocketException e) { }
-
-    }
-
 }
