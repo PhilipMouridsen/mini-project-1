@@ -1,30 +1,46 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import sun.tools.jstat.RawOutputFormatter;
-
+import java.util.*;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+import java.net.*;
 
 public class QuestionableDatagramSocket extends DatagramSocket {
 
-    Random random = new Random();
+    private Random random = new Random();
+    //private String[] words;
 
     enum Response {
         DISCARD, DUPLICATE, REORDER, SEND
     }
 
-    QuestionableDatagramSocket() throws SocketException {
+    QuestionableDatagramSocket() throws SocketException{
+        super();
+    }
 
+    QuestionableDatagramSocket(int i) throws SocketException {
+        super(i);
+    }
+
+    @Override //not needed I think
+    public synchronized void receive(DatagramPacket p) throws IOException {
+        super.receive(p);
+        String s = new String(p.getData());
+
+        // Logic
+        String[] words = s.split(" ");    
+    }
+
+    @Override
+    public void send(DatagramPacket p) throws IOException {
+        // TODO Auto-generated method stub
         Response[] responses = Response.values();
         int pickResponse = random.nextInt(4);
+        
+        String s = new String(p.getData());
+        String[] words = s.split(" ");
+        String respond = new String();
 
         switch (responses[pickResponse]) {
             case DISCARD:
-                System.out.println("DISCARD");
+                //;
                 break;
             case DUPLICATE:
                 System.out.println("DUPLICATE");
@@ -39,25 +55,12 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 break;
         }
 
-    }
-
-    @Override
-    public synchronized void receive(DatagramPacket p) throws IOException {
-        super.receive(p);
-        String s = new String(p.getData());
-
-        // Logic
-
-    }
-
-    @Override
-    public void send(DatagramPacket p) throws IOException {
-        // TODO Auto-generated method stub
+        byte[] msg = s.getBytes();
+        p.setData(msg);
         super.send(p);
     }
 
     public static void main(String[] args) {
-        
         try {
             QuestionableDatagramSocket socket = new QuestionableDatagramSocket();
         } catch (SocketException e) { }
