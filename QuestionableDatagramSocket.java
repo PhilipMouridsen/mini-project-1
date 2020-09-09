@@ -5,7 +5,6 @@ import java.net.*;
 public class QuestionableDatagramSocket extends DatagramSocket {
 
     private Random random = new Random();
-    // private String[] words;
 
     enum Response {
         DISCARD, DUPLICATE, REORDER, SEND
