@@ -29,7 +29,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
         List<String> stringList = new ArrayList<String>(Arrays.asList(words));
         String response = "";
 
-        switch (responses[1]) {
+        switch (responses[pickResponse]) {
             case DISCARD:
                 String lastWord = stringList.get(stringList.size() - 1);
                 response = lastWord;
