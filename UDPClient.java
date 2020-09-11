@@ -43,6 +43,7 @@ public class UDPClient {
             } finally { // Close socket
                 if (aSocket != null)
                     aSocket.close();
+                msgScan.close();
             }
         }
     }
