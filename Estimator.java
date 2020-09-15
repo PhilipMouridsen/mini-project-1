@@ -53,7 +53,7 @@ public class Estimator {
                 aSocket.close();
             System.out.println("Sent: " + number);
             double percentage = (double) (received * 100) / number;
-            System.out.println("Received: " + received + "(" + percentage + " %)" );
+            System.out.println("Received: " + received + " (" + percentage + " %)" );
         }
     }
 }
