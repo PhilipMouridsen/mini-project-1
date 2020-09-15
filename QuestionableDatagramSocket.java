@@ -47,7 +47,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 break;
 
             case REORDER:
-                Collections.shuffle(stringList);
+                Collections.reverse(stringList);
 
                 StringBuilder sb2 = new StringBuilder();
                 for (String word : stringList) {
