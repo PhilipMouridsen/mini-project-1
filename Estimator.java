@@ -51,9 +51,14 @@ public class Estimator {
         } finally { // Close socket
             if (aSocket != null)
                 aSocket.close();
-            System.out.println("Sent: " + number);
-            double percentage = (double) (received * 100) / number;
-            System.out.println("Received: " + received + " (" + percentage + " %)" );
+            printResults(size, number, received, timeout);
         }
+    }
+
+    private static void printResults(int size, int number, int received, int timeout){
+        System.out.println("Size per packet: " + size + ", timeout: " + timeout + "ms");
+        System.out.println("Amount sent: " + number);
+        double percentage = (double) (received * 100) / number;
+        System.out.println("Amount received: " + received + " (" + percentage + " %)" );
     }
 }
