@@ -29,7 +29,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
         List<String> stringList = new ArrayList<String>(Arrays.asList(words));
         String response = "";
 
-        switch (responses[pickResponse]) {
+        switch (responses[pickResponse]) { 
             case DISCARD:
                 String lastWord = stringList.get(stringList.size() - 1);
                 response = lastWord;
@@ -47,7 +47,7 @@ public class QuestionableDatagramSocket extends DatagramSocket {
                 break;
 
             case REORDER:
-                Collections.shuffle(stringList);
+                Collections.reverse(stringList);
 
                 StringBuilder sb2 = new StringBuilder();
                 for (String word : stringList) {
