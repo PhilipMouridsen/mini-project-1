@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.*;
 
 public class Estimator {
-    private static int serverPort = 7007; // For the server we're connecting to.
+    private static int serverPort = 7007; // For the server we're connecting to
 
     public static void main(String args[]) {
         DatagramSocket aSocket = null;
@@ -15,7 +15,7 @@ public class Estimator {
 
         try {
 
-            aSocket = new DatagramSocket(8009); // My port for listening to requests.
+            aSocket = new DatagramSocket(8009); // My port for listening to requests
             aSocket.setSoTimeout(timeout);
 
             // InetAddress aHost = InetAddress.getByName("localhost");
@@ -51,7 +51,9 @@ public class Estimator {
         } finally { // Close socket
             if (aSocket != null)
                 aSocket.close();
-            System.out.println(received);
+            System.out.println("Sent: " + number);
+            double percentage = (double) (received * 100) / number;
+            System.out.println("Received: " + received + "(" + percentage + " %)" );
         }
     }
 }
