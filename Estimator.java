@@ -18,8 +18,8 @@ public class Estimator {
             aSocket = new DatagramSocket(8009); // My port for listening to requests.
             aSocket.setSoTimeout(timeout);
 
-            InetAddress aHost = InetAddress.getByName("localhost");
-            // InetAddress aHost = InetAddress.getByName("10.26.15.161");
+            // InetAddress aHost = InetAddress.getByName("localhost");
+            InetAddress aHost = InetAddress.getByName("10.26.31.224");
 
             byte[] msgBytes = new byte[size];
 
@@ -40,7 +40,7 @@ public class Estimator {
                     aSocket.receive(reply);
                     received++;
                 } catch (SocketTimeoutException e) {
-                    System.out.println("timed out, continue");
+                    System.out.println("Timed out, continue...");
                 }
             }
 
