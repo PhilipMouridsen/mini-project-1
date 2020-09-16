@@ -19,8 +19,7 @@ public class Estimator {
             aSocket = new DatagramSocket(8010); // My port for listening to requests
             aSocket.setSoTimeout(timeout);
 
-            // InetAddress aHost = InetAddress.getByName("localhost");
-            InetAddress aHost = InetAddress.getByName("10.26.31.224");
+            InetAddress aHost = InetAddress.getByName("localhost");
 
             byte[] msgBytes = new byte[size];
 

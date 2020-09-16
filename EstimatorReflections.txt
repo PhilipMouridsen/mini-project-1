@@ -1,0 +1,120 @@
+We have used the Estimator class to test locally and on Wi-Fi, 
+how packet size and timeout tolerance affects the amount of lost packets.
+
+On a localhost connection, on one computer, almost no datagrams were lost, not even with 1 ms.
+On a Wi-Fi connection, between two computers, we received almost all datagrams with a 100 ms timeout, 
+~32 % with a 10 ms timeout, and only ~1.5 % with 1 ms timeout.
+This shows there is a significant difference in latency depending on the network connection.
+
+We didn't test via Ethernet or over the Internet,
+since we didn't have the necessary hardware or port forwarding tools for our routers.
+For Ethernet, we would expect slightly lower, or similar, latency than over Wi-Fi.
+We would expect higher latency over the Internet.
+
+The results and the parameters are attached in this text file, with the following structure:
+
+1. LOCALLY
+– Different timeouts
+– Different datagram sizes
+
+2. WI-FI
+– Different timeouts
+– Different datagram sizes
+
+–––––––––––––––––––––––––––
+RESULTS BELOW
+–––––––––––––––––––––––––––
+
+Parameter order for the java Estimator: [datagram size] [number] [timeout]
+
+1.LOCALLY
+
+Different timeouts:
+(java Estimator 1000 1000 1)
+Size per packet: 1000, timeout: 1ms
+Amount sent: 1000
+Amount received: 991 (99.1 %)
+Amount duplicates: 248 (24.8 %)
+Amount reordered: 243 (24.3 %)
+
+(java Estimator 1000 1000 10)
+Size per packet: 1000, timeout: 10ms
+Amount sent: 1000
+Amount received: 999 (99.9 %)
+Amount duplicates: 230 (23.0 %)
+Amount reordered: 256 (25.6 %)
+
+(java Estimator 1000 1000 100)
+Size per packet: 1000, timeout: 100ms
+Amount sent: 1000
+Amount received: 1000 (100.0 %)
+Amount duplicates: 261 (26.1 %)
+Amount reordered: 256 (25.6 %)
+
+Different datagram sizes:
+(java Estimator 11 1000 100)
+Size per packet: 11, timeout: 100ms
+Amount sent: 1000
+Amount received: 1000 (100.0 %)
+Amount duplicates: 247 (24.7 %)
+Amount reordered: 247 (24.7 %)
+
+(java Estimator 500 1000 100)
+Size per packet: 500, timeout: 100ms
+Amount sent: 1000
+Amount received: 1000 (100.0 %)
+Amount duplicates: 250 (25.0 %)
+Amount reordered: 244 (24.4 %)
+
+(java Estimator 1000 1000 100)
+Size per packet: 1000, timeout: 100ms
+Amount sent: 1000
+Amount received: 1000 (100.0 %)
+Amount duplicates: 269 (26.9 %)
+Amount reordered: 252 (25.2 %)
+
+WI-FI
+
+Different timeouts:
+(java Estimator 1000 1000 1)
+Size per packet: 1000, timeout: 1ms
+Amount sent: 1000
+Amount received: 15 (1.5 %)
+Amount duplicates: 1 (0.1 %)
+Amount reordered: 2 (0.2 %)
+
+(java Estimator 1000 1000 10)
+Size per packet: 1000, timeout: 10ms
+Amount sent: 1000
+Amount received: 325 (32.5 %)
+Amount duplicates: 72 (7.2 %)
+Amount reordered: 87 (8.7 %)
+
+(java Estimator 1000 1000 100)
+Size per packet: 1000, timeout: 100ms
+Amount sent: 1000
+Amount received: 922 (92.2 %)
+Amount duplicates: 234 (23.4 %)
+Amount reordered: 264 (26.4 %)
+
+Different datagram sizes:
+(java Estimator 11 1000 100)
+Size per packet: 11, timeout: 100ms
+Amount sent: 1000
+Amount received: 821 (82.1 %)
+Amount duplicates: 219 (21.9 %)
+Amount reordered: 188 (18.8 %)
+
+(java Estimator 500 1000 100)
+Size per packet: 500, timeout: 100ms
+Amount sent: 1000
+Amount received: 893 (89.3 %)
+Amount duplicates: 204 (20.4 %)
+Amount reordered: 233 (23.3 %)
+
+(java Estimator 1000 1000 100)
+Size per packet: 1000, timeout: 100ms
+Amount sent: 1000
+Amount received: 849 (84.9 %)
+Amount duplicates: 223 (22.3 %)
+Amount reordered: 213 (21.3 %)
