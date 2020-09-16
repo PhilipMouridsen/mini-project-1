@@ -1,5 +1,6 @@
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class ReliableUDPClient { // For the server we're connecting to.
 
@@ -9,6 +10,19 @@ public class ReliableUDPClient { // For the server we're connecting to.
         String ip = new String(args[0]);
         int serverPort = Integer.parseInt(args[1]); // 7007
         String input = new String(args[2]);
+        
+        //Checks if the input string is maximum 255 characters
+        if(input.length() > 255){
+            boolean validInput = false;
+            while(!validInput){
+                System.out.println("String must be less than: 255 characters");
+                System.out.print("Enter string: ");
+                Scanner sc = new Scanner(System.in);
+                input = sc.next();
+                if(input.length() <= 255) 
+                    validInput = true;
+            }
+        }
 
         try {
             aSocket = new DatagramSocket(8009); // My port for listening to requests.
