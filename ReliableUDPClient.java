@@ -14,13 +14,14 @@ public class ReliableUDPClient { // For the server we're connecting to.
         //Checks if the input string is maximum 255 characters
         if(input.length() > 255){
             boolean validInput = false;
-            System.out.println("String must be less than: 255 characters");
-            System.out.print("Enter string: ");
-            do{
+            while(!validInput){
+                System.out.println("String must be less than: 255 characters");
+                System.out.print("Enter string: ");
                 Scanner sc = new Scanner(System.in);
                 input = sc.next();
-                if(input.length() <= 255) validInput = true;
-            } while(!validInput);
+                if(input.length() <= 255) 
+                    validInput = true;
+            }
         }
 
         try {
