@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.*;
 import java.util.Scanner;
 
-public class ReliableUDPClient { // For the server we're connecting to.
+public class ReliableUDPClient { // For the server we're connecting to
 
     public static void main(String args[]) {
         DatagramSocket aSocket = null;
@@ -25,7 +25,7 @@ public class ReliableUDPClient { // For the server we're connecting to.
         }
 
         try {
-            aSocket = new DatagramSocket(8009); // My port for listening to requests.
+            aSocket = new DatagramSocket(8009); // My port for listening to requests
 
             byte[] msgBytes = new byte[255];
 
@@ -35,7 +35,6 @@ public class ReliableUDPClient { // For the server we're connecting to.
 
             // Send the message
             InetAddress aHost = InetAddress.getByName(ip);
-            // InetAddress aHost = InetAddress.getByName("10.26.15.161");
 
             try {
                 aSocket.connect(new InetSocketAddress(aHost, serverPort));

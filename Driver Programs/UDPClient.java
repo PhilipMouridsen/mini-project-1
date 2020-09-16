@@ -21,7 +21,6 @@ public class UDPClient {
 
                 // Send the message
                 InetAddress aHost = InetAddress.getByName("localhost");
-                // InetAddress aHost = InetAddress.getByName("10.26.15.161");
 
                 DatagramPacket request = new DatagramPacket(msgBytes, msgBytes.length, aHost, serverPort);
                 aSocket.send(request);
