@@ -7,7 +7,7 @@ public class ReliableUDPServer {
         int serverPort = 7007;
         DatagramSocket serverSocket = null;
 
-        byte[] buffer = new byte[1000];
+        byte[] buffer = new byte[255];
         DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
 
         try {
@@ -16,9 +16,9 @@ public class ReliableUDPServer {
 
             while (true) {
                 // listening
-                System.out.println("listening");
+                System.out.println("Listening");
                 serverSocket.receive(incoming);
-                System.out.println("Received from client " + new String(incoming.getData()));
+                System.out.println("Received from client: " + new String(incoming.getData()));
                 serverSocket.send(incoming);
             }
         } catch (SocketException e) { // Handle socket errors

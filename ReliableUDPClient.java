@@ -1,8 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class ReliableUDPClient {
-    private static int serverPort = 7007; // For the server we're connecting to.
+public class ReliableUDPClient { // For the server we're connecting to.
 
     public static void main(String args[]) {
         DatagramSocket aSocket = null;
@@ -14,15 +13,19 @@ public class ReliableUDPClient {
         try {
             aSocket = new DatagramSocket(8009); // My port for listening to requests.
 
-            byte[] msgBytes = input.getBytes();
+            byte[] msgBytes = new byte[255];
+
+            for (int i = 0; i < input.length(); i++) {
+                msgBytes[i] = input.getBytes()[i];
+            }
 
             // Send the message
-            InetAddress aHost = InetAddress.getByName("localhost"); // Philip "10.26.10.251"
+            InetAddress aHost = InetAddress.getByName(ip);
             // InetAddress aHost = InetAddress.getByName("10.26.15.161");
 
             try {
                 aSocket.connect(new InetSocketAddress(aHost, serverPort));
-                System.out.println("is connected to server");
+                System.out.println("Is connected to server");
             } catch (SocketException e) {
                 e.getStackTrace();
                 System.exit(0);
@@ -34,18 +37,20 @@ public class ReliableUDPClient {
             System.out.println(aHost);
 
             // Receive reply
-            byte[] buffer = new byte[1000]; // Allocate a buffer into which the reply message is written
+            byte[] buffer = new byte[255]; // Allocate a buffer into which the reply message is written
             DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
             aSocket.receive(reply);
 
             // Check Echo
             String respond = new String(reply.getData());
-            if (respond.equals(input)) {
-                System.out.println("Correct transmission");
-                System.out.println("Input: " + input + ", respond: " + respond);
+            if (respond.equals(new String(msgBytes))) {
+                System.out.println("Correct Transmission");
+                System.out.println("Input: " + input);
+                System.out.println("Response: " + respond);
             } else {
                 System.out.println("Wrong Transmission");
-                System.out.println("Should be: " + input + " is: " + respond);
+                System.out.println("Should be: " + input);
+                System.out.println("Is: " + respond);
             }
 
         } catch (SocketException e) { // Handle socket errors
