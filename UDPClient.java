@@ -14,7 +14,7 @@ public class UDPClient {
             try {
 
                 aSocket = new DatagramSocket(8009); // My port for listening to requests.
-                
+
                 // Read a message from standard input and convert to byte array
                 String msg = msgScan.nextLine();
                 byte[] msgBytes = msg.getBytes();

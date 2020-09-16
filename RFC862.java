@@ -14,21 +14,20 @@ public class RFC862 {
       serverSocket = new DatagramSocket(serverPort);
       System.out.println("UDP echo server on port " + serverPort);
 
-      while(true){
-        //listening
+      while (true) {
+        // listening
         System.out.println("listening");
         serverSocket.receive(incoming);
         System.out.println("Received from client " + new String(incoming.getData()));
         serverSocket.send(incoming);
       }
-    }
-    catch (SocketException e) { // Handle socket errors
+    } catch (SocketException e) { // Handle socket errors
       System.out.println("Socket exception: " + e.getMessage());
     } catch (IOException e) { // Handle IO errors
       System.out.println("IO exception: " + e.getMessage());
     } finally { // Close socket
       if (serverSocket != null)
-      serverSocket.close();
+        serverSocket.close();
     }
   }
 }

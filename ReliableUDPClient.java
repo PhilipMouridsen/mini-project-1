@@ -1,6 +1,5 @@
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class ReliableUDPClient {
     private static int serverPort = 7007; // For the server we're connecting to.
@@ -18,7 +17,7 @@ public class ReliableUDPClient {
             byte[] msgBytes = input.getBytes();
 
             // Send the message
-            InetAddress aHost = InetAddress.getByName(ip); // Philip "10.26.10.251"
+            InetAddress aHost = InetAddress.getByName("localhost"); // Philip "10.26.10.251"
             // InetAddress aHost = InetAddress.getByName("10.26.15.161");
 
             try {
@@ -41,7 +40,7 @@ public class ReliableUDPClient {
 
             // Check Echo
             String respond = new String(reply.getData());
-            if(respond.equals(input)){
+            if (respond.equals(input)) {
                 System.out.println("Correct transmission");
                 System.out.println("Input: " + input + ", respond: " + respond);
             } else {
